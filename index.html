@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f4f4f9;
+        }
+        .calculator input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: right;
+            border-radius: 5px;
+            border: 2px solid #007bff;
+            background-color: #e9ecef;
+        }
+        .calculator button {
+            width: 75px;
+            height: 75px;
+            font-size: 1.5rem;
+            margin: 5px;
+        }
+        .btn-operation {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-operation:hover {
+            background-color: #0056b3;
+        }
+        .btn-equal {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-equal:hover {
+            background-color: #218838;
+        }
+        .btn-clear {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-clear:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator text-center">
+    <input type="text" id="result" value="0" disabled>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-secondary" onclick="clearResult()">C</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary" onclick="deleteLast()">←</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary" onclick="appendToResult('%')">%</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-operation" onclick="appendToResult('/')">/</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('7')">7</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('8')">8</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('9')">9</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-operation" onclick="appendToResult('*')">*</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('4')">4</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('5')">5</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('6')">6</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-operation" onclick="appendToResult('-')">-</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('1')">1</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('2')">2</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('3')">3</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-operation" onclick="appendToResult('+')">+</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('0')">0</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" onclick="appendToResult('.')">.</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-operation" onclick="appendToResult('√')">√</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="text-center mt-4">
+        <p>&copy; 2024 Made by Basem Halaika. All rights reserved.</p>
+        <a href="https://dukingdraon.com/4/7251046" style="width: 50px; color: #FFCC00;">click here</a>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<script>
+    function appendToResult(value) {
+        const result = document.getElementById('result');
+        if (result.value === '0') {
+            result.value = value;
+        } else {
+            result.value += value;
+        }
+    }
+
+    function clearResult() {
+        document.getElementById('result').value = '0';
+    }
+
+    function deleteLast() {
+        const result = document.getElementById('result');
+        result.value = result.value.slice(0, -1);
+        if (result.value === '') {
+            result.value = '0';
+        }
+    }
+
+    function calculateResult() {
+        const result = document.getElementById('result').value;
+        try {
+            if (result.includes('√')) {
+                const number = parseFloat(result.replace('√', ''));
+                document.getElementById('result').value = Math.sqrt(number);
+            } else {
+                document.getElementById('result').value = eval(result);
+            }
+        } catch (error) {
+            document.getElementById('result').value = 'Error';
+        }
+    }
+</script>
+
+</body>
+</html>
